@@ -1,7 +1,4 @@
 
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("BddCliniquePlus.db");
-
 
 function findUserByMailAndPassword(mail, password, callback) {
   const sql =
@@ -27,28 +24,8 @@ function findAllUsers(callback) {
   });
 }
 
-function addKnowledge(mail, password, role, callback) {
-  const sql =
-    "INSERT OR IGNORE INTO knowledge (mail, password, role) VALUES (?, ?, ?)";
-
-  db.run(sql, [mail, password, role], function (err) {
-    if (err) {
-      console.error("Erreur insertion utilisateur :", err.message);
-      return callback(null);
-    }
-
-    if (this.changes === 0) {
-      console.log("Utilisateur déjà existant");
-      return callback(null);
-    }
-
-    console.log("Utilisateur créé");
-    return callback({
-      id: this.lastID,
-      mail,
-      role,
-    });
-  });
+async function addKnowledge(payload)  {
+  return await global.db.db("BrainBox").collection("Connaissances").insertOne(payload) ; 
 }
 
 function updateUserMail(mail,id,callback) {
@@ -117,4 +94,4 @@ function deleteUser(mail, callback) {
 }
 
 
-module.exports = { findUserByMailAndPassword, findAllUsers, addUser, updateUserMail, updateUserPassword, deleteUser} ;
+module.exports = { findUserByMailAndPassword, findAllUsers, addKnowledge, updateUserMail, updateUserPassword, deleteUser} ;

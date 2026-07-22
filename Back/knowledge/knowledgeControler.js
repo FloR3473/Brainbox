@@ -55,30 +55,34 @@ async function findAllUsers (req, res) {
 
 //Déclaration de la requête pour ajouter des utilisateurs
 async function addKnowledge (req, res) {
-  const { mail, password, role } = req.body;
+  const { title, content } = req.body;
 
-  if (!mail || !password || !role) {
+  if (!title || !content) {
     return res.status(400).json({
       success: false,
       message: "Body malformé",
     });
   }
+  const payload = {title, content} ;
+ const result = await knowledgeModel.addKnowledge(payload);
 
- await userModel.addKnowledge(mail, password, role, (user) => {
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "Utilisateur déjà existant",
-      });
-    }
+  return res.status(202).json({insertedId: result.insertedId})
+}
+  //  (knowledge) => {
+//     if (!knowledge) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Connaissance déjà existante",
+//       });
+//     }
 
-    return res.status(201).json({
-      success: true,
-      message: "profil créé",
-      user,
-    });
-  });
-};
+//     return res.status(201).json({
+//       success: true,
+//       message: "Connaissance créée",
+//       knowledge,
+//     });
+//   });
+// };
 
 //Déclaration de la requête pour modifier le mail de l'utilisateur
 async function updateUserMail (req, res)  {
