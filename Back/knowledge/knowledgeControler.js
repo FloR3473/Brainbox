@@ -33,27 +33,16 @@ async function findUserByMailAndPassword (req, res) {
 };
 
 
-//Déclaration de la requête voir tous les utilisateurs qui sont enregistrés dans la Bdd
-async function findAllUsers (req, res) {
+//Déclaration de la requête voir toutes les connaissances
+async function findAllKnowlegde (req, res) {
 
- await userModel.findAllUsers(
-    (user) => {
-      if (user) {
-        return res.status(200).json({
-          success: true,
-          message: "Tous les utilisateurs trouvés",
-          user,
-        });
-      } else {
-        return res
-          .status(400)
-          .json({ success: false, message: "Utilisateurs non trouvés" });
-      }
-    },
-  );
+  const result = await knowledgeModel.findAllKnowlegde()
+
+  return res.status(202).json({success : true, result})
+
 };
 
-//Déclaration de la requête pour ajouter des utilisateurs
+//Déclaration de la requête pour ajouter une connaissance
 async function addKnowledge (req, res) {
   const { title, content } = req.body;
 
@@ -63,26 +52,12 @@ async function addKnowledge (req, res) {
       message: "Body malformé",
     });
   }
+
   const payload = {title, content} ;
- const result = await knowledgeModel.addKnowledge(payload);
+  const result = await knowledgeModel.addKnowledge(payload);
 
   return res.status(202).json({insertedId: result.insertedId})
 }
-  //  (knowledge) => {
-//     if (!knowledge) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Connaissance déjà existante",
-//       });
-//     }
-
-//     return res.status(201).json({
-//       success: true,
-//       message: "Connaissance créée",
-//       knowledge,
-//     });
-//   });
-// };
 
 //Déclaration de la requête pour modifier le mail de l'utilisateur
 async function updateUserMail (req, res)  {
@@ -138,34 +113,24 @@ async function updateUserPassword (req, res) {
   });
 };
 
-// Déclaration de la requête pour supprimer un utilisateur
-async function deleteUser(req, res) {
-  const { mail } = req.params;  
-  if (!mail) {
+// Déclaration de la requête pour supprimer une connaissance
+async function deleteKnowledge(req, res) {
+  const { id } = req.params;  
+  if (!id) {
     return res.status(400).json({ success: false, message: "Paramètre manquant" });
   }
-  
- await userModel.deleteUser(mail, (err, user) => {
-    if (err){
-      return res.status(500).json({
-        success: false,
-        message: "Erreur dans la suppression utilisateur",
-    })
-  }
-    if (user === false) {
-      return res.status(400).json({
-        success: false,
-        message: "Utilisateur non trouvé",
+  const result = await knowledgeModel.deleteKnowledge(id)
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        message: "Connaissance introuvable"
       });
-    
-  } else if (user === true) {
+    }
+
     return res.status(200).json({
-      success: true,
-      message: "Utilisateur supprimé",
+      message: "Connaissance supprimée"
     });
-  }
-  });
-};
+
+  };
 
 
-module.exports = { findUserByMailAndPassword, findAllUsers, addKnowledge, updateUserMail, updateUserPassword, deleteUser} ;
+module.exports = { findUserByMailAndPassword, findAllKnowlegde, addKnowledge, updateUserMail, updateUserPassword, deleteKnowledge} ;

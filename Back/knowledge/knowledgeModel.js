@@ -1,4 +1,8 @@
+const { ObjectId } = require("mongodb");
 
+require("dotenv").config();
+const DB = process.env.MONGODB_DB;
+const COLLECTION = process.env.MONGODB_COLLECTION;
 
 function findUserByMailAndPassword(mail, password, callback) {
   const sql =
@@ -12,20 +16,12 @@ function findUserByMailAndPassword(mail, password, callback) {
   });
 }
 
-function findAllUsers(callback) {
-  const sql =
-    "SELECT id, mail, role FROM users";
-
-  db.all(sql, (err, user) => {
-    if (err) {
-      return callback(null);
-    }
-    callback(user);
-  });
+async function findAllKnowlegde(callback) {
+  return await global.db.db(DB).collection(COLLECTION).find().toArray()
 }
 
 async function addKnowledge(payload)  {
-  return await global.db.db("BrainBox").collection("Connaissances").insertOne(payload) ; 
+  return await global.db.db(DB).collection(COLLECTION).insertOne(payload) ; 
 }
 
 function updateUserMail(mail,id,callback) {
@@ -74,24 +70,9 @@ function updateUserPassword(password,id,callback) {
   });
 }
 
-function deleteUser(mail, callback) {
-  const sql = "DELETE FROM users WHERE mail = ?";
-
-  db.run(sql, [mail], function (err) {
-    if (err) {
-      console.error("Erreur dans la suppression utilisateur :", err.message);
-      return callback(err, null);
-    }
-
-    if (this.changes === 0) {
-      console.log("Aucun utilisateur trouvé");
-      return callback(null, false);
-    }
-
-    console.log("Utilisateur supprimé");
-    return callback(null, true);
-  });
+async function deleteKnowledge(id) {
+  return await global.db.db(DB).collection(COLLECTION).deleteOne({ _id : new ObjectId(id) });
 }
 
 
-module.exports = { findUserByMailAndPassword, findAllUsers, addKnowledge, updateUserMail, updateUserPassword, deleteUser} ;
+module.exports = { findUserByMailAndPassword, findAllKnowlegde, addKnowledge, updateUserMail, updateUserPassword, deleteKnowledge} ;
