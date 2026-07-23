@@ -29,6 +29,11 @@ async function findKnowledgeById(id) {
     .toArray();
 }
 
+async function findKnowledgeByTag(tag) {
+  return await getKnowledgeDb()
+    .find( { tag: tag } )
+    .toArray();
+}
 
 async function updateKnowledge(id, payload) {
   const filtre = { _id: new ObjectId(id) };
@@ -47,6 +52,7 @@ async function deleteKnowledge(id) {
 
 module.exports = {
   findKnowledgeById,
+  findKnowledgeByTag,
   findAllKnowlegde,
   addKnowledge,
   updateKnowledge,
