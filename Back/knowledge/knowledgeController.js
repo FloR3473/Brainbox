@@ -1,6 +1,8 @@
 //Importer les fonctions présentes dans knowledgeModel.js
 const knowledgeModel = require("./knowledgeModel");
 
+const axios = require("axios");
+
 //Déclaration de la requête une connaissance par son id
 async function findKnowledgeById(req, res) {
   const { id } = req.params;
@@ -77,10 +79,39 @@ async function deleteKnowledge(req, res) {
   });
 }
 
+
+// Déclaration envoyer une question à Ollama
+async function askAssistant(req, res) {
+  const { question } = req.body;
+  if (!question) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Question manquante" });
+  }
+
+  const ollamaResponse = await axios.post(
+    process.env.OLLAMA_URL,
+    {
+        model: process.env.OLLAMA_MODEL,
+        prompt: question,
+        stream: false
+    }
+  );
+
+  res.json({
+    question: question,
+    answer: ollamaResponse.data.response
+  });
+
+};
+
+
+
 module.exports = {
   findKnowledgeById,
   findAllKnowlegde,
   addKnowledge,
   updateKnowledge,
   deleteKnowledge,
+  askAssistant
 };

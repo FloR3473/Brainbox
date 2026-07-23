@@ -14,4 +14,7 @@ router.put("/knowledge/:id",knowledgeController.updateKnowledge)
 router.delete("/knowledge/:id",knowledgeController.deleteKnowledge)
 
 
+router.post("/assistant", knowledgeController.askAssistant)
+
+
 module.exports = router
