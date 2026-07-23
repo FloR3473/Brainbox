@@ -6,12 +6,12 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const knowledgeRouters = require("./knowledge/knowledgeRouters");
+const knowledgeRoutes = require("./knowledge/knowledgeRoutes");
 
 const { MongoClient } = require("mongodb");
 
 
-app.use(knowledgeRouters);
+app.use(knowledgeRoutes);
 
 async function main() {
   const uri = process.env.MONGODB_URI;

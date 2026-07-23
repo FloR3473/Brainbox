@@ -1,5 +1,6 @@
 //Importer les fonctions présentes dans knowledgeModel.js
 const knowledgeModel = require("./knowledgeModel");
+const extractTags = require("./utils/tagsUtils");
 
 const axios = require("axios");
 
@@ -43,7 +44,7 @@ async function addKnowledge(req, res) {
       });
     }
 
-    const payload = { title, content, categorie, tag, dateCreation: new Date() };
+    const payload = { title, content, categorie, tag : extractTags(tag), dateCreation: new Date() };
     const result = await knowledgeModel.addKnowledge(payload);
 
     return res.status(202).json({ insertedId: result.insertedId });
@@ -76,7 +77,7 @@ async function updateKnowledge(req, res) {
         message: "Body malformé",
       });
     }
-    const payload = { title, content, categorie, tag, dateModification: new Date() };
+    const payload = { title, content, categorie, tag : extractTags(tag), dateModification: new Date() };
     const result = await knowledgeModel.updateKnowledge(id, payload);
     return res.status(202).json({ message: "Document modifié" });
 
@@ -125,25 +126,46 @@ async function askAssistant(req, res) {
         .json({ success: false, message: "Question manquante" });
     }
 
-    const ollamaResponse = await axios.post(
-      process.env.OLLAMA_URL,
-      {
-          model: process.env.OLLAMA_MODEL,
-          prompt: question,
-          stream: false
-      }
-    );
+    const tags = extractTags(question);
+
+
+    const connaissances =
+        await knowledgeModel.findKnowledgeByTag(tags);
 
     res.json({
-      question: question,
-      answer: ollamaResponse.data.response
+        question,
+        tags,
+        connaissances
     });
 
-  } catch(error) {
+
+} catch(error){
+
     res.status(500).json({
         error:error.message
     });
-  };
+
+}
+
+  //   const ollamaResponse = await axios.post(
+  //     process.env.OLLAMA_URL,
+  //     {
+  //         model: process.env.OLLAMA_MODEL,
+  //         prompt: question,
+  //         stream: false
+  //     }
+  //   );
+
+  //   res.json({
+  //     question: question,
+  //     answer: ollamaResponse.data.response
+  //   });
+
+  // } catch(error) {
+  //   res.status(500).json({
+  //       error:error.message
+  //   });
+  // };
 };
 
 

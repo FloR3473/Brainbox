@@ -29,9 +29,9 @@ async function findKnowledgeById(id) {
     .toArray();
 }
 
-async function findKnowledgeByTag(tag) {
+async function findKnowledgeByTag(tags) {
   return await getKnowledgeDb()
-    .find( { tag: tag } )
+    .find( { tag: { $in : tags} } )
     .toArray();
 }
 
