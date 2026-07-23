@@ -60,30 +60,21 @@ async function addKnowledge (req, res) {
 }
 
 //Déclaration de la requête pour modifier le mail de l'utilisateur
-async function updateUserMail (req, res)  {
-  const {mail, id} = req.body;
+async function updateKnowledge (req, res)  {
+  const { id } = req.params;
+  const { title, content } = req.body;
 
-  if (!id || !mail) {
+  console.log(id, title, content);
+  
+  if ( !id || !title || !content ) {
     return res.status(400).json({
       success: false,
       message: "Body malformé",
     });
   }
+  const result = await knowledgeModel.updateKnowledge(id, title, content)
+  return res.status(202).json({"message" : "Document modifié"})
 
-  await userModel.updateUserMail(mail, id,(user) => {
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "Profil non modifié",
-      });
-    }
-    else (user)
-      return res.status(200).json({
-      success: true,
-      message: "Profil modifié",
-      user,
-    });
-  });
 };
 
 //Déclaration de la requête pour modifier le password de l'utilisateur
@@ -115,7 +106,7 @@ async function updateUserPassword (req, res) {
 
 // Déclaration de la requête pour supprimer une connaissance
 async function deleteKnowledge(req, res) {
-  const { id } = req.params;  
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({ success: false, message: "Paramètre manquant" });
   }
@@ -133,4 +124,4 @@ async function deleteKnowledge(req, res) {
   };
 
 
-module.exports = { findUserByMailAndPassword, findAllKnowlegde, addKnowledge, updateUserMail, updateUserPassword, deleteKnowledge} ;
+module.exports = { findUserByMailAndPassword, findAllKnowlegde, addKnowledge, updateKnowledge, updateUserPassword, deleteKnowledge} ;

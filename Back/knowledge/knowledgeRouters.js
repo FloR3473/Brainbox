@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const knowledgeControler = require ("./knowledgeControler");
+const knowledgeController = require ("./knowledgeController");
 
-// router.post("/login",knowledgeControler.findUserByMailAndPassword)
+// router.post("/login",knowledgeController.findUserByMailAndPassword)
 
-router.get("/allKnowlegde",knowledgeControler.findAllKnowlegde)
+router.get("/knowlegde",knowledgeController.findAllKnowlegde)
 
-router.post("/knowledge",knowledgeControler.addKnowledge)
+router.post("/knowledge",knowledgeController.addKnowledge)
 
-// router.put("/updatemail",knowledgeControler.updateUserMail)
+router.put("/knowledge/:id",knowledgeController.updateKnowledge)
 
-// router.put("/updatepass",knowledgeControler.updateUserPassword)
+// router.put("/updatepass",knowledgeController.updateUserPassword)
 
-router.delete("/knowledge/:id",knowledgeControler.deleteKnowledge)
+router.delete("/knowledge/:id",knowledgeController.deleteKnowledge)
 
 
 module.exports = router
