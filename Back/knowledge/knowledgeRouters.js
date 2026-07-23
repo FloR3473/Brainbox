@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const knowledgeController = require ("./knowledgeController");
 
-// router.post("/login",knowledgeController.findUserByMailAndPassword)
 
 router.get("/knowlegde",knowledgeController.findAllKnowlegde)
 

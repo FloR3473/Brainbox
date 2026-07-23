@@ -9,17 +9,7 @@ function getKnowledgeDb() {
     .db(DB)
     .collection(COLLECTION);
 }
-function findUserByMailAndPassword(mail, password, callback) {
-  const sql =
-    "SELECT id, mail, role FROM users WHERE mail = ? AND password = ?";
 
-  db.get(sql, [mail, password], (err, user) => {
-    if (err) {
-      return callback(null);
-    }
-    callback(user);
-  });
-}
 
 async function findAllKnowlegde() {
   return await getKnowledgeDb()
@@ -40,37 +30,15 @@ async function findKnowledgeById(id) {
 }
 
 
-async function updateKnowledge(id, title, content) {
+async function updateKnowledge(id, payload) {
   const filtre = { _id: new ObjectId(id) };
-  const update = { title: title, content: content };
   return await getKnowledgeDb()
     .updateOne(
       filtre,
-      { $set: update },
+      { $set: payload },
     );
 }
 
-function updateUserPassword(password, id, callback) {
-  const sql = "UPDATE users SET password = ? WHERE id =?";
-
-  db.run(sql, [password, id], function (err) {
-    if (err) {
-      console.error("Erreur modification password :", err.message);
-      return callback(null);
-    }
-
-    if (this.changes === 0) {
-      console.log("Password non modifié");
-      return callback(null);
-    }
-
-    console.log("Password modifié");
-    return callback({
-      id,
-      password,
-    });
-  });
-}
 
 async function deleteKnowledge(id) {
   return await getKnowledgeDb()
@@ -78,11 +46,9 @@ async function deleteKnowledge(id) {
 }
 
 module.exports = {
-  findUserByMailAndPassword,
   findKnowledgeById,
   findAllKnowlegde,
   addKnowledge,
   updateKnowledge,
-  updateUserPassword,
   deleteKnowledge,
 };
