@@ -6,11 +6,11 @@ const knowledgeController = require ("./knowledgeController");
 
 router.get("/knowlegde",knowledgeController.findAllKnowlegde)
 
+router.get("/knowlegde/:id",knowledgeController.findKnowledgeById)
+
 router.post("/knowledge",knowledgeController.addKnowledge)
 
 router.put("/knowledge/:id",knowledgeController.updateKnowledge)
-
-// router.put("/updatepass",knowledgeController.updateUserPassword)
 
 router.delete("/knowledge/:id",knowledgeController.deleteKnowledge)
 

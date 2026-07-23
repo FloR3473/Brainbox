@@ -32,6 +32,15 @@ async function findUserByMailAndPassword (req, res) {
   );
 };
 
+//Déclaration de la requête une connaissance par son id
+async function findKnowledgeById (req, res) {
+  const { id } = req.params;
+  const result = await knowledgeModel.findKnowledgeById(id)
+
+  return res.status(202).json({success : true, result})
+
+};
+
 
 //Déclaration de la requête voir toutes les connaissances
 async function findAllKnowlegde (req, res) {
@@ -59,50 +68,33 @@ async function addKnowledge (req, res) {
   return res.status(202).json({insertedId: result.insertedId})
 }
 
-//Déclaration de la requête pour modifier le mail de l'utilisateur
+//Déclaration de la requête pour modifier une connaissance
 async function updateKnowledge (req, res)  {
   const { id } = req.params;
   const { title, content } = req.body;
 
   console.log(id, title, content);
+
+  if ( !id ) {
+    return res.status(400).json({
+      success: false,
+      message: "Paramètre manquant",
+    });
+  };
   
-  if ( !id || !title || !content ) {
+  if ( !title || !content ) {
     return res.status(400).json({
       success: false,
       message: "Body malformé",
     });
-  }
+  };
+
+
   const result = await knowledgeModel.updateKnowledge(id, title, content)
   return res.status(202).json({"message" : "Document modifié"})
 
 };
 
-//Déclaration de la requête pour modifier le password de l'utilisateur
-async function updateUserPassword (req, res) {
-  const {password, id} = req.body;
-
-  if (!id || !password) {
-    return res.status(400).json({
-      success: false,
-      message: "Body malformé",
-    });
-  }
-
-  await userModel.updateUserPassword(password, id,(user) => {
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "Profil non modifié",
-      });
-    }
-    else (user)
-      return res.status(200).json({
-      success: true,
-      message: "Profil modifié",
-      user,
-    });
-  });
-};
 
 // Déclaration de la requête pour supprimer une connaissance
 async function deleteKnowledge(req, res) {
@@ -124,4 +116,4 @@ async function deleteKnowledge(req, res) {
   };
 
 
-module.exports = { findUserByMailAndPassword, findAllKnowlegde, addKnowledge, updateKnowledge, updateUserPassword, deleteKnowledge} ;
+module.exports = { findUserByMailAndPassword, findKnowledgeById, findAllKnowlegde, addKnowledge, updateKnowledge, deleteKnowledge} ;

@@ -33,6 +33,13 @@ async function addKnowledge(payload) {
     .insertOne(payload);
 }
 
+async function findKnowledgeById(id) {
+  return await getKnowledgeDb()
+    .find( { _id: new ObjectId(id) } )
+    .toArray();
+}
+
+
 async function updateKnowledge(id, title, content) {
   const filtre = { _id: new ObjectId(id) };
   const update = { title: title, content: content };
@@ -72,6 +79,7 @@ async function deleteKnowledge(id) {
 
 module.exports = {
   findUserByMailAndPassword,
+  findKnowledgeById,
   findAllKnowlegde,
   addKnowledge,
   updateKnowledge,
