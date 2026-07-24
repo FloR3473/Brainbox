@@ -1,0 +1,213 @@
+// Variables
+$table-primary: #2563eb;
+$table-primary-dark: #1e40af;
+$table-border: #e5e7eb;
+$table-background: #ffffff;
+$table-row-hover: #eff6ff;
+$table-row-alt: #f9fafb;
+$table-text: #374151;
+$table-header-text: #ffffff;
+
+:host {
+  display: block;
+  padding: 1.5rem;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: #111827;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+
+// Conteneur du tableau pour permettre le scroll horizontal
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+
+  // améliore l'expérience sur mobile
+  -webkit-overflow-scrolling: touch;
+}
+
+.knowledge-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: $table-background;
+  border-radius: 12px;
+  overflow: hidden;
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 40%;
+    min-width: 400px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.6;
+  }
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.05);
+
+  border: 1px solid $table-border;
+
+  thead {
+    background: linear-gradient(
+      135deg,
+      $table-primary,
+      $table-primary-dark
+    );
+
+    th {
+      color: $table-header-text;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+
+      &:first-child {
+        border-top-left-radius: 12px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 12px;
+      }
+    }
+  }
+
+
+  tbody {
+
+    tr {
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+
+      &:nth-child(even) {
+        background-color: $table-row-alt;
+      }
+
+      &:hover {
+        background-color: $table-row-hover;
+      }
+
+      td {
+        padding: 1rem 1.2rem;
+        color: $table-text;
+        font-size: 0.95rem;
+        border-bottom: 1px solid $table-border;
+        vertical-align: top;
+
+        max-width: 300px;
+
+        // Gestion des textes longs
+        &:nth-child(2) {
+          line-height: 1.5;
+          white-space: normal;
+          word-break: break-word;
+        }
+
+        // Style des tags
+        &:nth-child(4) {
+          color: $table-primary-dark;
+          font-weight: 500;
+        }
+
+        // Dates
+        &:nth-child(5),
+        &:nth-child(6) {
+          white-space: nowrap;
+          font-size: 0.85rem;
+          color: #6b7280;
+        }
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+  .tags-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-width: 180px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.3rem 0.65rem;
+
+    background: #dbeafe;
+    color: #1d4ed8;
+
+    border-radius: 999px;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    border: 1px solid #bfdbfe;
+
+    transition: all 0.2s ease;
+    
+    white-space: nowrap;
+
+    &:hover {
+      background: #2563eb;
+      color: white;
+      transform: translateY(-1px);
+    }
+  }
+
+// Responsive : tableau scrollable sur mobile
+@media (max-width: 900px) {
+
+  .knowledge-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    th,
+    td {
+      min-width: 150px;
+    }
+
+    td:nth-child(2) {
+      max-width: 250px;
+      white-space: normal;
+    }
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+
+// Version mobile compacte
+@media (max-width: 600px) {
+
+  :host {
+    padding: 1rem;
+  }
+
+  .knowledge-table {
+
+    th,
+    td {
+      padding: 0.8rem;
+      font-size: 0.85rem;
+    }
+  }
+}

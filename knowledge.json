@@ -1,0 +1,265 @@
+[
+  {
+    "title": "Composant Angular",
+    "content": "Un composant Angular est une unité autonome qui contrôle une partie de l'interface utilisateur. Il est composé d'une classe TypeScript contenant la logique, d'un template HTML définissant l'affichage et éventuellement d'un fichier CSS pour le style. Les composants sont décorés avec @Component.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "component",
+      "typescript",
+      "html",
+      "frontend"
+    ]
+  },
+  {
+    "title": "Architecture d'une application Angular",
+    "content": "Une application Angular est généralement organisée en composants, services, modules ou composants standalone, directives, pipes et modèles. Cette séparation permet de maintenir un code propre, réutilisable et facilement testable.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "architecture",
+      "structure",
+      "frontend",
+      "organisation"
+    ]
+  },
+  {
+    "title": "Injection de dépendances Angular",
+    "content": "L'injection de dépendances est un mécanisme Angular permettant de fournir automatiquement des services aux composants. Elle améliore la modularité, évite la création manuelle d'objets et facilite les tests unitaires.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "dependency_injection",
+      "service",
+      "inject",
+      "architecture"
+    ]
+  },
+  {
+    "title": "Services Angular",
+    "content": "Un service Angular contient généralement la logique métier ou les appels vers des API. Les services sont créés avec @Injectable et sont injectés dans les composants grâce au système d'injection de dépendances.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "service",
+      "injectable",
+      "api",
+      "backend"
+    ]
+  },
+  {
+    "title": "Routing Angular",
+    "content": "Le Router Angular permet de gérer la navigation entre plusieurs vues dans une application monopage. Chaque URL peut être associée à un composant spécifique.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "router",
+      "navigation",
+      "spa",
+      "route"
+    ]
+  },
+  {
+    "title": "Observable RxJS dans Angular",
+    "content": "RxJS fournit des Observables utilisés par Angular pour gérer les flux de données asynchrones. HttpClient retourne notamment des Observables pour les appels API.",
+    "category": "Angular",
+    "tags": [
+      "angular",
+      "rxjs",
+      "observable",
+      "asynchrone",
+      "flux"
+    ]
+  },
+  {
+    "title": "Variables JavaScript",
+    "content": "JavaScript permet de déclarer des variables avec var, let et const. let permet de modifier une valeur tandis que const empêche la réassignation d'une variable.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "variable",
+      "let",
+      "const",
+      "es6"
+    ]
+  },
+  {
+    "title": "Fonctions JavaScript",
+    "content": "Une fonction JavaScript est un bloc de code réutilisable pouvant recevoir des paramètres et retourner une valeur. Les fonctions fléchées introduites avec ES6 offrent une syntaxe plus concise.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "fonction",
+      "arrow_function",
+      "es6",
+      "return"
+    ]
+  },
+  {
+    "title": "Programmation asynchrone JavaScript",
+    "content": "JavaScript utilise les Promises, async/await et les callbacks pour gérer les opérations longues comme les appels réseau sans bloquer l'exécution du programme.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "async",
+      "await",
+      "promise",
+      "asynchrone"
+    ]
+  },
+  {
+    "title": "Manipulation du DOM JavaScript",
+    "content": "Le DOM représente la structure d'une page HTML sous forme d'arbre d'objets. JavaScript permet de modifier le contenu, les styles et les événements des éléments HTML.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "dom",
+      "html",
+      "event",
+      "frontend"
+    ]
+  },
+  {
+    "title": "Tableaux JavaScript",
+    "content": "Les tableaux permettent de stocker plusieurs valeurs dans une seule structure. Les méthodes map, filter, reduce et forEach sont couramment utilisées pour transformer et parcourir les données.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "array",
+      "map",
+      "filter",
+      "reduce"
+    ]
+  },
+  {
+    "title": "Objets JavaScript",
+    "content": "Un objet JavaScript représente une collection de propriétés associées à des valeurs. Les objets sont utilisés pour représenter des données complexes dans les applications.",
+    "category": "JavaScript",
+    "tags": [
+      "javascript",
+      "objet",
+      "propriété",
+      "json",
+      "structure"
+    ]
+  },
+  {
+    "title": "Variables Python",
+    "content": "Python utilise un typage dynamique : une variable est créée automatiquement lors de son affectation. Le type peut être vérifié avec la fonction type().",
+    "category": "Python",
+    "tags": [
+      "python",
+      "variable",
+      "type",
+      "syntaxe"
+    ]
+  },
+  {
+    "title": "Fonctions Python",
+    "content": "Les fonctions Python sont définies avec le mot-clé def. Elles permettent de structurer le programme et d'éviter la répétition de code.",
+    "category": "Python",
+    "tags": [
+      "python",
+      "fonction",
+      "def",
+      "return",
+      "programmation"
+    ]
+  },
+  {
+    "title": "Listes Python",
+    "content": "Une liste Python est une collection ordonnée et modifiable pouvant contenir plusieurs éléments. Elle possède des méthodes comme append, remove et sort.",
+    "category": "Python",
+    "tags": [
+      "python",
+      "liste",
+      "collection",
+      "append",
+      "donnees"
+    ]
+  },
+  {
+    "title": "Programmation orientée objet Python",
+    "content": "Python supporte la programmation orientée objet avec les classes, objets, attributs, méthodes, héritagse et encapsulation.",
+    "category": "Python",
+    "tags": [
+      "python",
+      "poo",
+      "classe",
+      "objet",
+      "heritage"
+    ]
+  },
+  {
+    "title": "Gestion des exceptions Python",
+    "content": "Les exceptions permettent de gérer les erreurs pendant l'exécution d'un programme avec les blocs try, except, else et finally.",
+    "category": "Python",
+    "tag": [
+      "python",
+      "exception",
+      "erreur",
+      "try",
+      "except"
+    ]
+  },
+  {
+    "title": "Requête SELECT SQL",
+    "content": "La commande SELECT permet de récupérer des données depuis une ou plusieurs tables SQL. Elle peut être combinée avec WHERE, ORDER BY et LIMIT.",
+    "category": "SQL",
+    "tags": [
+      "sql",
+      "select",
+      "requete",
+      "database",
+      "table"
+    ]
+  },
+  {
+    "title": "Jointure SQL",
+    "content": "Une jointure SQL permet de récupérer des données provenant de plusieurs tables liées entre elles. Les principales jointures sont INNER JOIN, LEFT JOIN, RIGHT JOIN et FULL JOIN.",
+    "category": "SQL",
+    "tags": [
+      "sql",
+      "join",
+      "relation",
+      "database",
+      "table"
+    ]
+  },
+  {
+    "title": "Clé primaire SQL",
+    "content": "Une clé primaire identifie de manière unique chaque ligne d'une table. Elle garantit qu'une valeur ne peut pas être dupliquée.",
+    "category": "SQL",
+    "tags": [
+      "sql",
+      "primary_key",
+      "database",
+      "identifiant",
+      "relation"
+    ]
+  },
+  {
+    "title": "Clé étrangère SQL",
+    "content": "Une clé étrangère crée une relation entre deux tables en faisant référence à une clé primaire d'une autre table.",
+    "category": "SQL",
+    "tags": [
+      "sql",
+      "foreign_key",
+      "relation",
+      "database",
+      "intégrite"
+    ]
+  },
+  {
+    "title": "Index SQL",
+    "content": "Un index SQL améliore les performances des recherches en permettant au moteur de base de données de retrouver plus rapidement les informations.",
+    "category": "SQL",
+    "tags": [
+      "sql",
+      "index",
+      "performance",
+      "optimisation",
+      "database"
+    ]
+  }
+]

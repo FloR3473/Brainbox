@@ -35,16 +35,16 @@ async function findAllKnowlegde(req, res) {
 //Déclaration de la requête pour ajouter une connaissance
 async function addKnowledge(req, res) {
   try {
-    const { title, content, categorie, tag } = req.body;
+    const { title, content, category, tags } = req.body;
 
-    if (!title || !content || !categorie || !tag) {
+    if (!title || !content || !category || !tags) {
       return res.status(400).json({
         success: false,
         message: "Body malformé",
       });
     }
 
-    const payload = { title, content, categorie, tag : extractTags(tag), dateCreation: new Date() };
+    const payload = { title, content, category, tags : extractTags(tags), createAt: new Date() };
     const result = await knowledgeModel.addKnowledge(payload);
 
     return res.status(202).json({ insertedId: result.insertedId });
@@ -61,7 +61,7 @@ async function addKnowledge(req, res) {
 async function updateKnowledge(req, res) {
   try {
     const { id } = req.params;
-    const { title, content, categorie, tag } = req.body;
+    const { title, content, category, tags } = req.body;
 
 
     if (!id) {
@@ -71,13 +71,13 @@ async function updateKnowledge(req, res) {
       });
     }
 
-    if (!title || !content) {
+    if (!title || !content || !category || !tags) {
       return res.status(400).json({
         success: false,
         message: "Body malformé",
       });
     }
-    const payload = { title, content, categorie, tag : extractTags(tag), dateModification: new Date() };
+    const payload = { title, content, category, tags : extractTags(tags), modifiedAt: new Date() };
     const result = await knowledgeModel.updateKnowledge(id, payload);
     return res.status(202).json({ message: "Document modifié" });
 
@@ -129,12 +129,12 @@ async function askAssistant(req, res) {
     const tags = extractTags(question);
 
 
-    const connaissances =
-        await knowledgeModel.findKnowledgeByTag(tags);
+    let connaissances = await knowledgeModel.findKnowledgeByTag(tags);
+    connaissances = connaissances.map(connaissances => {return connaissances.content})
 
     const promptOllama = `Tu es BrainBox.
-        Tu réponds uniquement avec les informations fournies.
         Tu n'utilises jamais tes connaissances générales.
+        Tu réponds uniquement avec les informations fournies.
         Si la réponse n'existe pas dans les informations,
         réponds exactement :
         "Je ne possède pas cette information."
@@ -156,8 +156,10 @@ async function askAssistant(req, res) {
       }
     );
 
+
     res.json({
       question: question,
+      connaissances: connaissances,
       answer: ollamaResponse.data.response
     });
 
