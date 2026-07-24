@@ -20,3 +20,13 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  
+  frontend:
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    ports:
+      - 4200:8080
+
+volumes:
+  ollama:

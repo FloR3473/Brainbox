@@ -132,40 +132,40 @@ async function askAssistant(req, res) {
     const connaissances =
         await knowledgeModel.findKnowledgeByTag(tags);
 
+    const promptOllama = `Tu es BrainBox.
+        Tu réponds uniquement avec les informations fournies.
+        Tu n'utilises jamais tes connaissances générales.
+        Si la réponse n'existe pas dans les informations,
+        réponds exactement :
+        "Je ne possède pas cette information."
+
+        Informations disponibles :
+
+        ${connaissances}
+
+        Question utilisateur :
+
+        ${question}`
+
+    const ollamaResponse = await axios.post(
+      process.env.OLLAMA_URL,
+      {
+          model: process.env.OLLAMA_MODEL,
+          prompt: promptOllama,
+          stream: false
+      }
+    );
+
     res.json({
-        question,
-        tags,
-        connaissances
+      question: question,
+      answer: ollamaResponse.data.response
     });
 
-
-} catch(error){
-
+  } catch(error) {
     res.status(500).json({
         error:error.message
     });
-
-}
-
-  //   const ollamaResponse = await axios.post(
-  //     process.env.OLLAMA_URL,
-  //     {
-  //         model: process.env.OLLAMA_MODEL,
-  //         prompt: question,
-  //         stream: false
-  //     }
-  //   );
-
-  //   res.json({
-  //     question: question,
-  //     answer: ollamaResponse.data.response
-  //   });
-
-  // } catch(error) {
-  //   res.status(500).json({
-  //       error:error.message
-  //   });
-  // };
+  };
 };
 
 
