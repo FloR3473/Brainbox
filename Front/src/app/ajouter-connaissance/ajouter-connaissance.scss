@@ -1,0 +1,155 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background: #f5f7fb;
+}
+
+.add-knowledge {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  margin-bottom: 2rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #1f2937;
+  }
+
+  p {
+    margin-top: .5rem;
+    color: #6b7280;
+  }
+}
+
+.knowledge-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 600;
+    margin-bottom: .5rem;
+    color: #374151;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: .9rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all .2s ease;
+    background: #fff;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, .12);
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 220px;
+    line-height: 1.6;
+  }
+
+  small {
+    margin-top: .4rem;
+    color: #6b7280;
+    font-size: .85rem;
+  }
+}
+
+.success {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #d4edda;
+  color: #155724;
+}
+
+.error {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8d7da;
+  color: #721c24;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: .9rem 1.6rem;
+  font-size: .95rem;
+  font-weight: 600;
+  transition: .2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: white;
+
+  &:hover {
+    background: #4338ca;
+  }
+}
+
+.btn-secondary {
+  background: #eef2f7;
+  color: #374151;
+
+  &:hover {
+    background: #e5e7eb;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .add-knowledge {
+    padding: 1.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}

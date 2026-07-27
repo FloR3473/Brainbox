@@ -3,9 +3,9 @@ const router = express.Router();
 const knowledgeController = require ("./knowledgeController");
 
 
-router.get("/knowlegde",knowledgeController.findAllKnowlegde)
+router.get("/knowledge",knowledgeController.findAllKnowledge)
 
-router.get("/knowlegde/:id",knowledgeController.findKnowledgeById)
+router.get("/knowledge/:id",knowledgeController.findKnowledgeById)
 
 router.post("/knowledge",knowledgeController.addKnowledge)
 

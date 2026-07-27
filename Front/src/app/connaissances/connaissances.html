@@ -1,32 +1,79 @@
 <h2>Liste des connaissances enregistrées</h2>
 <div class="table-container">
-    <table class="knowledge-table">
-        
+  <table class="knowledge-table">
     <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Contenu</th>
-            <th>Catégorie</th>
-            <th>Tags</th>
-            <th>Date de création</th>
-            <th>Date de modification</th>
-        </tr>
+      <tr>
+        <th>Titre</th>
+        <th>Contenu</th>
+        <th>Catégorie</th>
+        <th>Tags</th>
+        <th>Date de création</th>
+        <th>Date de modification</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
-        @for (knowledge of knowledge(); track knowledge._id) {
+      @for (knowledge of knowledge(); track knowledge._id) {
         <tr>
-            <td>{{ knowledge.title }}</td>
-            <td>{{ knowledge.content }}</td>
-            <td>{{ knowledge.category }}</td>
-            <td class="tags-cell">
-                @for (tag of knowledge.tags; track tag) {
-                    <span class="tag">{{ tag }}</span>
-                    }
-            </td>
-            <td>{{ knowledge.createAt }}</td>
-            <td>{{ knowledge.modifiedAt }}</td>
-        }
+          <td>
+            @if (knowledgeEnModification?._id === knowledge._id) {
+              <input type="text" name="title" [(ngModel)]="titre" />
+            } @else {
+              {{ knowledge.title }}
+            }
+          </td>
+
+          <td>
+            @if (knowledgeEnModification?._id === knowledge._id) {
+              <textarea name="content" [(ngModel)]="contenu"> </textarea>
+            } @else {
+              {{ knowledge.content }}
+            }
+          </td>
+
+          <td>
+            @if (knowledgeEnModification?._id === knowledge._id) {
+              <input type="text" name="category" [(ngModel)]="categorie" />
+            } @else {
+              {{ knowledge.category }}
+            }
+          </td>
+
+          <td>
+            @if (knowledgeEnModification?._id === knowledge._id) {
+              <input type="text" name="tags" [(ngModel)]="tags" />
+            } @else {
+              @for (tag of knowledge.tags; track tag) {
+                <span class="tag">
+                  {{ tag }}
+                </span>
+              }
+            }
+          </td>
+
+          <td>
+            {{ knowledge.createAt }}
+          </td>
+
+          <td>
+            {{ knowledge.modifiedAt }}
+          </td>
+
+          <td>
+            @if (knowledgeEnModification?._id === knowledge._id) {
+              <button type="button" (click)="enregistrerModification()">Enregistrer</button>
+
+              <button type="button" (click)="annulerModification()">Annuler</button>
+            } @else {
+              <button type="button" (click)="modifierConnaissance(knowledge)">Modifier</button>
+
+              <button type="button" (click)="supprimerConnaissance(knowledge._id)">
+                Supprimer
+              </button>
+            }
+          </td>
+        </tr>
+      }
     </tbody>
-    
-    </table>
+  </table>
 </div>

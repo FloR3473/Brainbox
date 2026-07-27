@@ -1,1 +1,39 @@
-<p>chat-ia works!</p>
+<div class="chat-container">
+
+  <header class="chat-header">
+    <h2>Assistant IA</h2>
+    <p>Posez une question sur votre base de connaissances.</p>
+  </header>
+
+  <div>
+    <textarea
+      rows="2"
+      placeholder="Posez votre question..."
+      [(ngModel)]="question">
+    </textarea>
+  
+    <button
+    type="button"
+    (click)="demanderConnaissance()"
+    [disabled]="loadReponse">
+
+    @if (loadReponse) {
+        <span class="spinner"></span>
+        Génération...
+    } @else {
+        Envoyer
+    }
+    </button>
+    
+    @if(reponse()){
+
+        <hr>
+
+        <h3>Réponse</h3>
+
+        <p>{{ reponse() }}</p>
+
+    }
+</div>
+
+</div>

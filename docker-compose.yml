@@ -5,6 +5,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9000:3000"
+    volumes:
+      - ./Back:/app
+      - /app/node_modules
+    env_file:
+      - ./Back/.env
+    depends_on:
+      - ollama
 
   ollama:
     image: ollama/ollama
@@ -27,6 +34,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - 4200:8080
+    volumes:
+      - ./Front:/app
+      - /app/node_modules
+   
+    depends_on:
+      - backend
 
 volumes:
   ollama:
+  Front:
+  Back:

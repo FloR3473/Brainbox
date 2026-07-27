@@ -19,9 +19,9 @@ async function findKnowledgeById(req, res) {
 };
 
 //Déclaration de la requête voir toutes les connaissances
-async function findAllKnowlegde(req, res) {
+async function findAllKnowledge(req, res) {
   try {
-  const result = await knowledgeModel.findAllKnowlegde();
+  const result = await knowledgeModel.findAllKnowledge();
 
   return res.status(202).json({ success: true, result });
 
@@ -174,7 +174,7 @@ async function askAssistant(req, res) {
 
 module.exports = {
   findKnowledgeById,
-  findAllKnowlegde,
+  findAllKnowledge,
   addKnowledge,
   updateKnowledge,
   deleteKnowledge,

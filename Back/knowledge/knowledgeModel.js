@@ -11,7 +11,7 @@ function getKnowledgeDb() {
 }
 
 
-async function findAllKnowlegde() {
+async function findAllKnowledge() {
   return await getKnowledgeDb()
     .find()
     .toArray();
@@ -54,7 +54,7 @@ async function deleteKnowledge(id) {
 module.exports = {
   findKnowledgeById,
   findKnowledgeByTag,
-  findAllKnowlegde,
+  findAllKnowledge,
   addKnowledge,
   updateKnowledge,
   deleteKnowledge,
