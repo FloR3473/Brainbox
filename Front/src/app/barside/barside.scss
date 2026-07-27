@@ -4,7 +4,8 @@
   display: flex;
   min-height: 100vh;
   background: #fc0000;
-  color: #1f2937;
+  color: #17263b;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
   .sidebar {
     width: 260px;
@@ -22,7 +23,7 @@
       letter-spacing: 0.5px;
       padding: 0.8rem 1rem;
       margin-bottom: 2rem;
-      color: #60a5fa;
+      color: #59a4ff;
       text-align: center;
     }
 
@@ -60,7 +61,7 @@
         }
 
         &.active {
-          background: #2563eb;
+          background: hsl(221, 70%, 39%);
           color: #ffffff;
 
           box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
