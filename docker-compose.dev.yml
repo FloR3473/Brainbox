@@ -4,9 +4,13 @@ services:
       dockerfile: Dockerfile.dev
     ports: !override #override pour éviter les conflits avec les ports déja défini dans le compose principal
       - 4200:4200
-
     volumes:
       - ./Front:/app
       - /app/node_modules
 
-    command: npm start
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./Back:/app
+      - /app/node_modules
