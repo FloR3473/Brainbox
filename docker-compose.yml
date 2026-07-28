@@ -33,7 +33,7 @@ services:
       context: ./Front
       dockerfile: Dockerfile
     ports:
-      - 4200:8080
+      - 4200:4200
     volumes:
       - ./Front:/app
       - /app/node_modules
