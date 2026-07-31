@@ -3,6 +3,7 @@ services:
     build:
       context: ./Back
       dockerfile: Dockerfile
+    image: flor3473/brainbox:backend
     ports:
       - "9000:3000"
     volumes:
@@ -32,6 +33,7 @@ services:
     build:
       context: ./Front
       dockerfile: Dockerfile
+    image: flor3473/brainbox:frontend
     ports:
       - 4200:4200
     volumes:
