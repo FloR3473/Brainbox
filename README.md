@@ -241,7 +241,7 @@ Cette configuration permet à Ollama d'utiliser le GPU lorsque celui-ci est disp
 Depuis la racine du projet :
 
 ```bash
-docker compose up -d --build
+docker compose up -d
 ```
 
 Les services démarrés sont :
