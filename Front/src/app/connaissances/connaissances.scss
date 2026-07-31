@@ -1,391 +1,296 @@
-// ==============================
+// ==========================================
 // Variables
-// ==============================
+// ==========================================
 
-$table-primary: #2563eb;
-$table-primary-dark: #1e40af;
-$table-border: #e5e7eb;
-$table-background: #ffffff;
-$table-row-hover: #eff6ff;
-$table-row-alt: #f9fafb;
-$table-text: #374151;
+$primary: #2563eb;
+$primary-dark: #1d4ed8;
 
 $success: #16a34a;
-$success-dark: #15803d;
-
 $danger: #dc2626;
-$danger-dark: #b91c1c;
 
-$warning: #f59e0b;
+$border: #e5e7eb;
+
+$background: #ffffff;
+$row-hover: #eff6ff;
+$row-alt: #f8fafc;
+
+$text: #374151;
 
 
-// ==============================
+// ==========================================
 // Host
-// ==============================
+// ==========================================
 
 :host {
+
   display: block;
-  padding: 1.5rem;
-  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+
+  padding: 15px;
+
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background: #f8fafc;
+
 }
 
 
-// ==============================
+// ==========================================
 // Titre
-// ==============================
+// ==========================================
 
 h2 {
-  margin-bottom: 1.5rem;
+
+  margin-bottom: 24px;
 
   color: #111827;
 
-  font-size: 1.6rem;
+  font-size: 28px;
+
   font-weight: 700;
 
-  letter-spacing: -0.02em;
 }
 
 
-// ==============================
+// ==========================================
+// Barre de recherche
+// ==========================================
+
+mat-form-field {
+
+  width: 100%;
+
+  margin-bottom: 20px;
+
+}
+
+
+// ==========================================
 // Conteneur
-// ==============================
+// ==========================================
 
 .table-container {
-  width: 100%;
-  overflow-x: auto;
 
-  border-radius: 12px;
+  overflow: auto;
 
-  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow:
+      0 8px 24px rgba(0,0,0,.08);
+
 }
 
 
-// ==============================
-// Tableau
-// ==============================
+// ==========================================
+// Table Material
+// ==========================================
 
 .knowledge-table {
 
   width: 100%;
-  min-width: 1100px;
 
-  border-collapse: separate;
-  border-spacing: 0;
+  min-width: 1400px;
 
-  background: $table-background;
+  background: white;
 
-  border-radius: 12px;
-  overflow: hidden;
-
-  border: 1px solid $table-border;
-
-  box-shadow:
-    0 4px 6px rgba(0,0,0,.05),
-    0 10px 20px rgba(0,0,0,.05);
-
-
-  th:nth-child(2),
-  td:nth-child(2) {
-
-    width: 40%;
-    min-width: 400px;
-
-    white-space: normal;
-    overflow-wrap: break-word;
-
-    line-height: 1.6;
-  }
-
-
-  // ==========================
-  // Header
-  // ==========================
-
-  thead {
-
-    background: linear-gradient(
-      135deg,
-      $table-primary,
-      $table-primary-dark
-    );
-
-
-    th {
-
-      padding: 1rem 1.2rem;
-
-      color: white;
-
-      text-align: left;
-
-      font-size: .9rem;
-      font-weight: 600;
-
-      text-transform: uppercase;
-      letter-spacing: .04em;
-
-      white-space: nowrap;
-
-
-      &:first-child {
-        border-top-left-radius: 12px;
-      }
-
-
-      &:last-child {
-        border-top-right-radius: 12px;
-      }
-    }
-  }
-
-
-
-  // ==========================
-  // Corps
-  // ==========================
-
-  tbody {
-
-    tr {
-
-      transition:
-        background .2s ease,
-        transform .2s ease;
-
-
-      &:nth-child(even) {
-        background: $table-row-alt;
-      }
-
-
-      &:hover {
-
-        background: $table-row-hover;
-
-      }
-
-
-      td {
-
-        padding: 1rem 1.2rem;
-
-        color: $table-text;
-
-        font-size: .95rem;
-
-        border-bottom: 1px solid $table-border;
-
-        vertical-align: top;
-
-
-        &:nth-child(5),
-        &:nth-child(6) {
-
-          white-space: nowrap;
-
-          color: #6b7280;
-
-          font-size: .85rem;
-        }
-
-      }
-
-
-
-      &:last-child td {
-        border-bottom: none;
-      }
-    }
-  }
 }
 
 
+// ==========================================
+// Header
+// ==========================================
 
-// ==============================
-// Mode édition
-// ==============================
+.mat-mdc-header-row {
+
+  background: linear-gradient(
+      135deg,
+      $primary,
+      $primary-dark
+  );
+
+}
+
+
+.mat-mdc-header-cell {
+
+  color: white !important;
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .05em;
+
+}
+
+
+// ==========================================
+// Lignes
+// ==========================================
+
+.mat-mdc-row {
+
+  transition: .2s;
+
+}
+
+
+.mat-mdc-row:nth-child(even) {
+
+  background: $row-alt;
+
+}
+
+
+.mat-mdc-row:hover {
+
+  background: $row-hover;
+
+}
+
+
+// ==========================================
+// Cellules
+// ==========================================
+
+.mat-mdc-cell {
+
+  padding: 18px 16px;
+
+  color: $text;
+
+  vertical-align: top;
+
+  border-bottom: 1px solid $border;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+}
+
+
+// ==========================================
+// Largeurs colonnes
+// ==========================================
+
+.mat-column-title {
+
+  width: 180px;
+
+}
+
+
+.mat-column-content {
+
+  min-width: 200px;
+
+  max-width: 400px;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+
+}
+
+
+.mat-column-category {
+
+  width: 150px;
+
+}
+
+
+.mat-column-tags {
+
+  width: 150px;
+
+}
+
+
+.mat-column-createAt,
+.mat-column-modifiedAt {
+
+  width: 150px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+}
+
+
+.mat-column-actions {
+
+  width: 150px;
+
+}
+
+
+// ==========================================
+// Inputs
+// ==========================================
 
 input,
 textarea {
 
   width: 100%;
 
-  padding: .55rem .7rem;
+  padding: 10px;
 
   border-radius: 8px;
 
   border: 1px solid #cbd5e1;
 
-  background: white;
-
-  color: #111827;
-
-  font-size: .9rem;
-
   font-family: inherit;
 
+  font-size: 14px;
 
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
-
-
-
-  &:focus {
-
-    outline: none;
-
-    border-color: $table-primary;
-
-    box-shadow:
-      0 0 0 3px rgba(37,99,235,.15);
-
-  }
+  transition: .2s;
 
 }
 
 
+input:focus,
+textarea:focus {
+
+  outline: none;
+
+  border-color: $primary;
+
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+
+}
+
 
 textarea {
 
-  min-height: 120px;
+  min-height: 140px;
 
   resize: vertical;
 
 }
 
 
-
-// ==============================
-// Boutons
-// ==============================
+// ==========================================
+// Boutons Material
+// ==========================================
 
 button {
 
-  border: none;
+  margin-right: 8px;
 
-  border-radius: 8px;
-
-  padding: .55rem .9rem;
-
-  margin: .2rem;
-
-  cursor: pointer;
-
-  font-size: .85rem;
-
-  font-weight: 600;
-
-  transition:
-    background .2s ease,
-    transform .15s ease,
-    box-shadow .2s ease;
-
-
-
-  &:hover {
-
-    transform: translateY(-1px);
-
-  }
-
-
-  &:active {
-
-    transform: translateY(0);
-
-  }
+  margin-bottom: 8px;
 
 }
 
 
-// Bouton modifier
-
-button:nth-child(1) {
-
-  background: #dbeafe;
-
-  color: #1d4ed8;
-
-
-  &:hover {
-
-    background: #bfdbfe;
-
-  }
-}
-
-
-
-// Bouton supprimer
-
-button:nth-child(2) {
-
-  background: #fee2e2;
-
-  color: $danger;
-
-
-  &:hover {
-
-    background: #fecaca;
-
-  }
-}
-
-
-
-// Bouton enregistrer
-
-button:first-child {
-
-  background: $success;
-
-  color: white;
-
-
-  &:hover {
-
-    background: $success-dark;
-
-  }
-}
-
-
-// Bouton annuler
-
-button:last-child {
-
-  background: #f3f4f6;
-
-  color: #374151;
-
-
-  &:hover {
-
-    background: #e5e7eb;
-
-  }
-}
-
-
-
-// ==============================
+// ==========================================
 // Tags
-// ==============================
-
-.tags-cell {
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: .4rem;
-
-  max-width: 180px;
-}
-
-
+// ==========================================
 
 .tag {
 
@@ -393,103 +298,88 @@ button:last-child {
 
   align-items: center;
 
+  margin: 2px;
 
-  padding: .3rem .65rem;
-
-
-  background: #dbeafe;
-
-  color: #1d4ed8;
-
+  padding: 4px 10px;
 
   border-radius: 999px;
 
+  background: #dbeafe;
 
-  font-size: .8rem;
+  color: $primary-dark;
+
+  font-size: 12px;
 
   font-weight: 600;
 
-
   border: 1px solid #bfdbfe;
 
-
-  transition: .2s ease;
-
-
-
-  &:hover {
-
-    background: $table-primary;
-
-    color: white;
-
-    transform: translateY(-1px);
-
-  }
 }
 
 
+// ==========================================
+// Pagination
+// ==========================================
 
-// ==============================
+mat-paginator {
+
+  border-top: 1px solid $border;
+
+}
+
+
+// ==========================================
+// Scrollbar
+// ==========================================
+
+.table-container::-webkit-scrollbar {
+
+  height: 10px;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb {
+
+  background: #cbd5e1;
+
+  border-radius: 999px;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb:hover {
+
+  background: #94a3b8;
+
+}
+
+
+// ==========================================
 // Responsive
-// ==============================
+// ==========================================
 
-@media (max-width: 900px) {
-
-
-  :host {
-    padding: 1rem;
-  }
-
+@media (max-width: 1200px) {
 
   .knowledge-table {
 
-    min-width: 900px;
-
-
-    th,
-    td {
-
-      padding: .8rem;
-
-      font-size: .85rem;
-
-    }
+    min-width: 1200px;
 
   }
 
+}
+
+@media (max-width: 768px) {
+
+  :host {
+
+    padding: 12px;
+
+  }
 
   h2 {
 
-    font-size: 1.3rem;
-
-  }
-
-}
-
-
-
-@media (max-width: 600px) {
-
-
-  .knowledge-table {
-
-    min-width: 750px;
-
-  }
-
-
-  input,
-  textarea {
-
-    font-size: .85rem;
-
-  }
-
-
-  button {
-
-    width: 100%;
+    font-size: 22px;
 
   }
 

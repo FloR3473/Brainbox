@@ -1,79 +1,269 @@
 <h2>Liste des connaissances enregistrées</h2>
+
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom:20px;">
+  <mat-label>Rechercher</mat-label>
+
+  <input
+    matInput
+    placeholder="Titre, contenu, catégorie, tags..."
+    (keyup)="appliquerFiltre($event)">
+</mat-form-field>
+
 <div class="table-container">
-  <table class="knowledge-table">
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Contenu</th>
-        <th>Catégorie</th>
-        <th>Tags</th>
-        <th>Date de création</th>
-        <th>Date de modification</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (knowledge of knowledge(); track knowledge._id) {
-        <tr>
-          <td>
+
+<table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="knowledge-table">
+
+    <!-- ========================= -->
+    <!-- Titre -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="title">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Titre
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
             @if (knowledgeEnModification?._id === knowledge._id) {
-              <input type="text" name="title" [(ngModel)]="titre" />
-            } @else {
-              {{ knowledge.title }}
-            }
-          </td>
 
-          <td>
+                <textarea
+                    [(ngModel)]="titre">
+                </textarea>
+
+            } @else {
+
+                {{knowledge.title}}
+
+            }
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Contenu -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="content">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            Contenu
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
             @if (knowledgeEnModification?._id === knowledge._id) {
-              <textarea name="content" [(ngModel)]="contenu"> </textarea>
-            } @else {
-              {{ knowledge.content }}
-            }
-          </td>
 
-          <td>
+                <textarea
+                    [(ngModel)]="contenu">
+                </textarea>
+
+            } @else {
+
+                {{knowledge.content}}
+
+            }
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Catégorie -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="category">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            Catégorie
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
             @if (knowledgeEnModification?._id === knowledge._id) {
-              <input type="text" name="category" [(ngModel)]="categorie" />
-            } @else {
-              {{ knowledge.category }}
-            }
-          </td>
 
-          <td>
+                <textarea
+                    [(ngModel)]="categorie">
+                </textarea>
+
+            } @else {
+
+                {{knowledge.category}}
+
+            }
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Tags -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="tags">
+
+        <th mat-header-cell *matHeaderCellDef>
+
+            Tags
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
             @if (knowledgeEnModification?._id === knowledge._id) {
-              <input type="text" name="tags" [(ngModel)]="tags" />
+
+                <textarea
+                    [(ngModel)]="tags">
+                </textarea>
+
             } @else {
-              @for (tag of knowledge.tags; track tag) {
-                <span class="tag">
-                  {{ tag }}
-                </span>
-              }
+
+                @for(tag of knowledge.tags; track tag){
+
+                    <span class="tag">
+
+                        {{tag}}
+
+                    </span>
+
+                }
+
             }
-          </td>
 
-          <td>
-            {{ knowledge.createAt }}
-          </td>
+        </td>
 
-          <td>
-            {{ knowledge.modifiedAt }}
-          </td>
+    </ng-container>
 
-          <td>
+    <!-- ========================= -->
+    <!-- Création -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="createAt">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            Création
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
+            {{knowledge.createAt | date:'dd/MM/yyyy HH:mm'}}
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Modification -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="modifiedAt">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+
+            Modification
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
+            {{knowledge.modifiedAt | date:'dd/MM/yyyy HH:mm'}}
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Actions -->
+    <!-- ========================= -->
+
+    <ng-container matColumnDef="actions">
+
+        <th mat-header-cell *matHeaderCellDef>
+
+            Actions
+
+        </th>
+
+        <td mat-cell *matCellDef="let knowledge">
+
             @if (knowledgeEnModification?._id === knowledge._id) {
-              <button type="button" (click)="enregistrerModification()">Enregistrer</button>
 
-              <button type="button" (click)="annulerModification()">Annuler</button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="enregistrerModification()">
+
+                    Enregistrer
+
+                </button>
+
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="annulerModification()">
+
+                    Annuler
+
+                </button>
+
             } @else {
-              <button type="button" (click)="modifierConnaissance(knowledge)">Modifier</button>
 
-              <button type="button" (click)="supprimerConnaissance(knowledge._id)">
-                Supprimer
-              </button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="modifierConnaissance(knowledge)">
+
+                    Modifier
+
+                </button>
+
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="supprimerConnaissance(knowledge._id)">
+
+                    Supprimer
+
+                </button>
+
             }
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
+
+        </td>
+
+    </ng-container>
+
+    <!-- ========================= -->
+    <!-- Table -->
+    <!-- ========================= -->
+
+    <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns">
+    </tr>
+
+    <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+
+</table>
+
 </div>
+
+<mat-paginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5,10,20,50]"
+    showFirstLastButtons>
+
+</mat-paginator>

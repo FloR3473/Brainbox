@@ -1,9 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { ConnaissancesService } from '../connaissances-service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ajouter-connaissance',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './ajouter-connaissance.html',
   styleUrl: './ajouter-connaissance.scss',
@@ -16,10 +18,10 @@ export class AjouterConnaissance {
   categorie = "";
   tags = "";
   
-  message = "";
-  messageType: "success" | "error" | "" = "";
+  message = signal("");
+  messageType = signal<"success" | "error" | "">("");
 
-    ajouterConnaissance() {
+    ajouterConnaissance(form: NgForm) {
         const connaissance = {
           title: this.titre,
           content: this.contenu,
@@ -28,22 +30,31 @@ export class AjouterConnaissance {
           };
     this.connaissancesService.addKnowledge(connaissance).subscribe({
       next: (response) => { 
-        this.message = "La connaissance a été ajoutée avec succès.";
-        this.messageType = "success";
+        console.log("SUCCESS", response);
+
+        this.message.set("La connaissance a été ajoutée avec succès.");
+        this.messageType.set("success");
 
       // Vider le formulaire
-        this.titre = "";
-        this.contenu = "";
-        this.categorie = "";
-        this.tags = "";
+        form.resetForm();  
+      
+        setTimeout(() => {
+        this.message.set("")
+        this.messageType.set("");
+        }, 3000);
       }, 
     
 
     error: (err) => {
       console.error(err);
 
-      this.message = "Une erreur est survenue lors de l'ajout de la connaissance.";
-      this.messageType = "error";
+      this.message.set("Une erreur est survenue lors de l'ajout de la connaissance.");
+      this.messageType.set("error");
+
+      setTimeout(() => {
+      this.message.set("");
+      this.messageType.set("");
+      }, 3000);
     }
     });
   }

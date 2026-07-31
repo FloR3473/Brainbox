@@ -1,74 +1,75 @@
-<div class="add-knowledge">
+  <div class="add-knowledge">
 
-  <div class="header">
-    <h2>Ajouter une connaissance</h2>
-    <p>Enrichissez votre BrainBox avec une nouvelle connaissance.</p>
+    <div class="header">
+      <h2>Ajouter une connaissance</h2>
+      <p>Enrichissez votre BrainBox avec une nouvelle connaissance.</p>
+    </div>
+
+    <form 
+      class="knowledge-form" 
+      #form="ngForm" 
+      (ngSubmit)="ajouterConnaissance(form)">
+
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Ex : Architecture hexagonale"
+          [(ngModel)]="titre"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Catégorie</label>
+        <input
+          id="category"
+          name="category"
+          type="text"
+          placeholder="Ex : Développement"
+          [(ngModel)]="categorie"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="content">Contenu</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="10"
+          placeholder="Décrivez votre connaissance..."
+          [(ngModel)]="contenu"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <input
+          id="tags"
+          name="tags"
+          type="text"
+          placeholder="Angular, TypeScript, Clean Architecture..."
+          [(ngModel)]="tags"
+        />
+        <small>Séparez les tags avec une virgule.</small>
+      </div>
+
+      <div class="actions">
+
+        <button type="submit" class="btn-primary">
+             Ajouter la connaissance
+        </button>
+      </div>
+      @if (message()) {
+          <div
+              [class.success]="messageType() === 'success'"
+              [class.error]="messageType() === 'error'">
+
+              {{ message() }}
+          </div>
+          }
+
+    </form>
+
   </div>
-
-  <form class="knowledge-form">
-
-    <div class="form-group">
-      <label for="title">Titre</label>
-      <input
-        id="title"
-        name="title"
-        type="text"
-        placeholder="Ex : Architecture hexagonale"
-        [(ngModel)]="titre"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="category">Catégorie</label>
-      <input
-        id="category"
-        name="category"
-        type="text"
-        placeholder="Ex : Développement"
-        [(ngModel)]="categorie"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="content">Contenu</label>
-      <textarea
-        id="content"
-        name="content"
-        rows="10"
-        placeholder="Décrivez votre connaissance..."
-        [(ngModel)]="contenu"
-      ></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="tags">Tags</label>
-      <input
-        id="tags"
-        name="tags"
-        type="text"
-        placeholder="Angular, TypeScript, Clean Architecture..."
-        [(ngModel)]="tags"
-      />
-      <small>Séparez les tags avec une virgule.</small>
-    </div>
-
-    <div class="actions">
-
-      <button type="submit" class="btn-primary"
-      (click) = "ajouterConnaissance()" >
-        
-        Ajouter la connaissance
-      </button>
-    </div>
-    @if (message) {
-        <div
-            [class.success]="messageType === 'success'"
-            [class.error]="messageType === 'error'">
-
-            {{ message }}
-        </div>
-        }
-
-  </form>
-
-</div>
